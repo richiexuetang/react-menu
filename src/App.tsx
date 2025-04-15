@@ -70,19 +70,21 @@ function App() {
         <hr />
         {Object.entries(mealOfferings).map(([meal, items]) => (
           <div
-            className="h-[500px] p-4 flex flex-col items-start"
+            className="h-[500px] p-4 flex flex-col items-start gap-2"
             key={meal}
             ref={getRef(meal)}
           >
             <h2 className="items-start">{meal}</h2>
-            <div className="flex gap-10 m-2">
+            <div className="grid grid-cols-2 gap-10">
               {items.map((item) => (
                 <Card key={item.name}>
                   <CardContent>
-                    <div className="flex flex-col">
-                      <h3>{item.name}</h3>
-                      <p>{item.description}</p>
-                      <p>${item.price.toFixed(2)}</p>
+                    <div className="flex">
+                      <div className="flex flex-col items-start gap-5">
+                        <h3>{item.name}</h3>
+                        <p className="text-sm text-left">{item.description}</p>
+                        <p className="text-xs">${item.price.toFixed(2)}</p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

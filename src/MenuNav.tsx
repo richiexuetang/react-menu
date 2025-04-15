@@ -29,7 +29,7 @@ export const MenuNav = ({
   };
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="sticky top-0 bg-white py-4">
       <NavigationMenuList>
         {meals.map((meal) => (
           <NavigationMenuItem key={meal}>
