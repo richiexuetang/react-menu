@@ -6,8 +6,42 @@ on:
       - main
 
 jobs:
-  build:
-    name: build
+  debug-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug before checkout
+        run: |
+          echo "Working directory before checkout:"
+          pwd
+          echo "Directory contents before checkout:"
+          ls -la
+          echo "Environment variables:"
+          env | sort
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for proper Git operations
+          # Add explicit token for authentication
+          token: ${{ github.token }}
+
+      - name: Debug after checkout
+        run: |
+          echo "Working directory after checkout:"
+          pwd
+          echo "Directory contents after checkout:"
+          ls -la
+          echo "Git status:"
+          git status || echo "Git status failed"
+          echo "Git info:"
+          git --version
+          git config --list || echo "Git config failed"
+          echo ".git directory:"
+          ls -la .git || echo ".git directory not found"
+
+  build-and-test:
+    needs: debug-environment
+    name: build-and-test
     runs-on: ubuntu-latest
 
     strategy:
@@ -37,6 +71,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
