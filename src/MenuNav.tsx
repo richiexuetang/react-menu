@@ -19,12 +19,19 @@ export const MenuNav = ({
   const meals = ["Breakfast", "Lunch", "Dinner"];
 
   const executeScroll = (meal: string) => {
+    let element = null;
     if (meal === "Breakfast") {
-      breakfastRef.current?.scrollIntoView({ behavior: "smooth" });
+      element = breakfastRef?.current;
     } else if (meal === "Lunch") {
-      lunchRef.current?.scrollIntoView({ behavior: "smooth" });
+      element = lunchRef?.current;
     } else {
-      dinnerRef.current?.scrollIntoView({ behavior: "smooth" });
+      element = dinnerRef?.current;
+    }
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 100,
+        behavior: "smooth",
+      });
     }
   };
 

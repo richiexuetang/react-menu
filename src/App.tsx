@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import "./App.css";
 import { MenuNav } from "./MenuNav";
 import { Card, CardContent } from "./components/ui/card";
 import { Separator } from "./components/ui/separator";
@@ -73,7 +72,11 @@ const mealOfferings = {
   ],
 };
 
+// type Meal = "Breakfast" | "Lunch" | "Dinner";
+
 function App() {
+  // const [currentMeal, setCurrentMeal] = useState<Meal>("Breakfast");
+
   const breakfastRef = useRef(null);
   const lunchRef = useRef(null);
   const dinnerRef = useRef(null);
@@ -89,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-full h-auto">
+    <div className="min-h-full h-auto p-8">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col items-start">
           <h1 className="text-2xl">React Menu</h1>
