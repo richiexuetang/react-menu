@@ -1,4 +1,4 @@
-name: Deploy
+name: React App CI/CD
 
 on:
   push:
@@ -82,8 +82,8 @@ jobs:
           path: ./dist
 
   deploy:
-    name: Deploy
-    needs: build
+    name: deploy
+    needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
